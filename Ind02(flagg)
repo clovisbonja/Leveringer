@@ -1,0 +1,23 @@
+# Det som ligger inni parantesene, er delene som er brukt for å lage hver flagg. 
+fun flagg(kvadrat1, kvadrat2, rektangel1, rektangel2, langstripe, kortstripe, bakgrunn):
+  frame(
+    put-image(square(60, "solid", kvadrat1), 30, 30,
+      put-image(square(60, "solid", kvadrat2), 30, 130,
+        put-image(rectangle(120, 60, "solid", rektangel1 ), 160, 130,
+          put-image(rectangle(120, 60, "solid", rektangel2 ), 160, 30,
+            put-image(rectangle(20, 360, "solid", langstripe), 80, -20,
+              put-image(rectangle(520, 20, "solid", kortstripe), -40, 80,
+                rectangle(220, 160, "solid", bakgrunn))))))))
+
+end
+# Starter å definere flaggene ved å sette inn riktig farge til riktig del
+norge = flagg("crimson", "crimson", "crimson", "crimson", "darkblue", "darkblue", "white")
+island = flagg("navy", "navy", "navy", "navy", "crimson", "crimson", "white")
+sverige = flagg("steel-blue", "steel-blue", "steel-blue", "steel-blue", "gold", "gold", "gold")
+finland = flagg("white", "white", "white", "white", "navy", "navy", "navy")
+danmark = flagg("crimson", "crimson", "crimson", "crimson", "white", "white", "crimson")
+faeroyene = flagg("white", "white", "white", "white", "crimson", "crimson", "navy")
+aaland = flagg("steel-blue", "steel-blue", "steel-blue", "steel-blue", "crimson", "crimson", "gold")
+
+# I denne funksjonen har jeg valgt å bruke verktøyet "frame" fordi funksjonen lar meg lage de ulike delene sammen slik at flaggene kan endre fargene.
+
