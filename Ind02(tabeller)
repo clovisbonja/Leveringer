@@ -1,0 +1,69 @@
+
+include shared-gdrive(
+"dcic-2021",
+"1wyQZj_L0qqV9Ekgr9au6RX2iqt2Ga8Ep")
+
+include gdrive-sheets
+include data-source
+ssid = "1RYN0i4Zx_UETVuYacgaGfnFcv4l9zd9toQTTdkQkj7g"
+kWh-wealthy-consumer-data =
+load-table: komponent, energi
+source: load-spreadsheet(ssid).sheet-by-name("kWh", true)
+    sanitize energi using string-sanitizer 
+  end 
+
+print(kWh-wealthy-consumer-data)
+
+fun energi-to-number(str :: String) -> Number:
+  cases(Option) string-to-number(str):
+    | some(a) => a
+    | none => 0
+  end
+where:
+  energi-to-number("50") is 50
+  energi-to-number("30") is 30
+  energi-to-number("37") is 37
+  energi-to-number("5") is 5 
+  energi-to-number("4") is 4 
+  energi-to-number("15") is 15 
+  energi-to-number("48") is 48
+  energi-to-number("12") is 12
+  energi-to-number("4") is 4
+end
+
+nytabell = transform-column(kWh-wealthy-consumer-data, "energi", energi-to-number)
+
+nytabell
+
+#lager egne verdier for at pyret skal vise hvordan man regner ut energiforbruket/ oppgave 2 d
+
+distanceTraveledPerDay = 20
+distancePerUnitOfFuel = 2
+energyPerUnitOfFuel = 5
+
+car-energy-per-day = (distanceTraveledPerDay / distancePerUnitOfFuel) * energyPerUnitOfFuel
+
+print(car-energy-per-day)
+
+total-energi-forbruk = sum(nytabell, "energi")
+print(total-energi-forbruk)
+
+# oppgave 2e, skriver ut tabellen som et diagram
+bar-chart(nytabell, "komponent", "energi")
+
+#Det jeg kunne ha endret i funksjonen "energi-to-number" var å legge inn det kalkulerte bilutslippet slik at tabellen oppdaterte seg. 
+
+chart = table: komponent :: String, energi :: Number
+  row: "bil", 50
+  row: "fly", 30
+  row: "ovnk", 37
+  row: "lys", 5
+  row: "dingser", 4
+  row: "mlk", 15
+  row: "varer", 48
+  row: "varetransport", 12
+  row: "offtjen", 4
+end
+
+bar-chart(nytabell, "komponent", "energi")
+
