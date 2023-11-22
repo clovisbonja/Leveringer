@@ -1,0 +1,11 @@
+gress = rectangle(500, 130, "solid", "dark-green")
+gressnr2 = rectangle(500, 100, "solid", "forest-green")
+tre = rectangle(80, 500, "solid", "brown")
+sol = circle(80, "solid", "yellow")
+himmel = empty-color-scene(450, 450, "light-green")
+
+put-image(gress, 200, 10,
+  put-image(gressnr2, 200, 100, 
+    put-image(tre, 160, 200,
+      put-image(sol, 430, 450,
+        himmel))))
